@@ -58,7 +58,7 @@ export const HeroContent = ({
       >
         <Button
           size="lg"
-          className="bg-slate-950 hover:bg-slate-900 text-white h-12 px-8 text-lg rounded-full"
+          className="bg-primary h-12 px-8 text-lg rounded-full"
         >
           Start Reading Free
           <ArrowRight className="ml-2 h-5 w-5" />

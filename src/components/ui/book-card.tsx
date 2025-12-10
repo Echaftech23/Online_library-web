@@ -17,7 +17,7 @@ interface BookCardProps {
 export const BookCard = ({ book, className }: BookCardProps) => (
   <Card
     className={cn(
-      "bg-neutral-900 border-neutral-800 overflow-hidden group hover:border-neutral-700 transition-colors",
+      "bg-card border-border overflow-hidden group hover:border-primary/30 hover:shadow-lg transition-all duration-300",
       className
     )}
   >
@@ -30,21 +30,23 @@ export const BookCard = ({ book, className }: BookCardProps) => (
         unoptimized
       />
       <div className="absolute top-3 left-3">
-        <Badge className="bg-black/60 hover:bg-black/70 backdrop-blur-md text-white border-none">
+        <Badge className="bg-background/80 hover:bg-background/90 backdrop-blur-md text-foreground border-none">
           {book.category}
         </Badge>
       </div>
     </CardContent>
     <CardFooter className="flex flex-col items-start p-4">
-      <div className="flex items-center gap-1 text-yellow-500 mb-2">
+      <div className="flex items-center gap-1 text-primary mb-2">
         <Star className="h-4 w-4 fill-current" />
-        <span className="text-sm font-medium text-white">{book.rating}</span>
+        <span className="text-sm font-medium text-foreground">
+          {book.rating}
+        </span>
       </div>
-      <h3 className="text-lg font-semibold text-white line-clamp-1">
+      <h3 className="text-lg font-semibold text-card-foreground line-clamp-1">
         {book.title}
       </h3>
-      <p className="text-sm text-neutral-400 mb-4">{book.author}</p>
-      <Button className="w-full bg-neutral-800 hover:bg-neutral-700 text-white">
+      <p className="text-sm text-muted-foreground mb-4">{book.author}</p>
+      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
         Read Now
       </Button>
     </CardFooter>

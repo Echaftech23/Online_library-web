@@ -11,16 +11,16 @@ interface BookCardSkeletonProps {
 export const BookCardSkeleton = ({ className }: BookCardSkeletonProps) => (
   <Card
     className={cn(
-      "bg-neutral-900 border-neutral-800 overflow-hidden animate-pulse",
+      "bg-card border-border overflow-hidden animate-pulse",
       className
     )}
   >
-    <CardContent className="p-0 relative aspect-2/3 bg-neutral-800" />
+    <CardContent className="p-0 relative aspect-2/3 bg-muted" />
     <CardFooter className="flex flex-col items-start p-4 gap-2">
-      <div className="h-4 w-16 bg-neutral-800 rounded" />
-      <div className="h-5 w-full bg-neutral-800 rounded" />
-      <div className="h-4 w-24 bg-neutral-800 rounded" />
-      <div className="h-10 w-full bg-neutral-800 rounded mt-2" />
+      <div className="h-4 w-16 bg-muted rounded" />
+      <div className="h-5 w-full bg-muted rounded" />
+      <div className="h-4 w-24 bg-muted rounded" />
+      <div className="h-10 w-full bg-muted rounded mt-2" />
     </CardFooter>
   </Card>
 );
@@ -34,12 +34,12 @@ interface BookCardSkeletonGridProps {
  * Grid of skeleton loaders for loading states
  */
 export const BookCardSkeletonGrid = ({
-  count = 7,
+  count = 6,
   className,
 }: BookCardSkeletonGridProps) => (
   <div
     className={cn(
-      "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4",
+      "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4",
       className
     )}
   >

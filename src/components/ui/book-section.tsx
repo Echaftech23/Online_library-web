@@ -12,7 +12,6 @@ interface BookSectionProps {
   subject: string;
   limit?: number;
   className?: string;
-  accentColor?: string;
 }
 
 /**
@@ -23,7 +22,6 @@ export const BookSection = ({
   subject,
   limit = 6,
   className,
-  accentColor = "bg-amber-500",
 }: BookSectionProps) => {
   const { books, isLoading } = useBooks({ subject, limit });
 
@@ -32,12 +30,12 @@ export const BookSection = ({
       {/* Section Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-slate-200 mb-2">{title}</h2>
-          <div className="h-1 w-12 rounded-full bg-amber-500" />
+          <h2 className="text-2xl font-bold text-foreground mb-2">{title}</h2>
+          <div className="h-1 w-12 rounded-full bg-primary" />
         </div>
         <Button
           variant="link"
-          className="text-amber-600 hover:text-amber-500 gap-1"
+          className="text-primary hover:text-primary/80 gap-1"
         >
           Show more
           <ChevronRight className="h-4 w-4" />

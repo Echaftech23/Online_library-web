@@ -3,8 +3,14 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, Search } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { AventiLogo } from "./aventi-logo";
 
 // --- Data ---
@@ -29,10 +35,10 @@ const NavLink = ({ href, label, className }: NavLinkProps) => (
 
 const SearchInput = () => (
   <div className="relative w-64">
-    <Search className="absolute left-2 top-2.5 h-4 w-4 text-neutral-500" />
+    <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
     <Input
       placeholder="Search books..."
-      className="pl-8 bg-neutral-900/50 border-neutral-800 text-neutral-200 focus:ring-blue-500"
+      className="pl-8 bg-input border-border text-foreground focus:ring-ring"
     />
   </div>
 );
@@ -44,7 +50,7 @@ const DesktopNav = () => (
         key={link.label}
         href={link.href}
         label={link.label}
-        className="text-sm text-neutral-400 hover:text-white transition-colors"
+        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
       />
     ))}
     <SearchInput />
@@ -52,14 +58,15 @@ const DesktopNav = () => (
 );
 
 const DesktopActions = () => (
-  <div className="hidden md:flex items-center gap-4">
+  <div className="hidden md:flex items-center gap-3">
+    <ThemeToggle />
     <Button
       variant="ghost"
-      className="text-neutral-300 hover:text-white hover:bg-white/10"
+      className="text-muted-foreground hover:text-foreground hover:bg-accent"
     >
       Sign In
     </Button>
-    <Button className="bg-slate-950 hover:bg-slate-900 text-white">
+    <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
       Get Started
     </Button>
   </div>
@@ -68,13 +75,13 @@ const DesktopActions = () => (
 const MobileMenu = () => (
   <Sheet>
     <SheetTrigger asChild>
-      <Button variant="ghost" size="icon" className="md:hidden text-white">
+      <Button variant="ghost" size="icon" className="md:hidden text-foreground">
         <Menu className="h-6 w-6" />
       </Button>
     </SheetTrigger>
     <SheetContent
       side="right"
-      className="bg-neutral-950 border-neutral-800 text-white"
+      className="bg-background border-border text-foreground"
     >
       <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
       <div className="flex flex-col gap-6 mt-8">
@@ -83,14 +90,20 @@ const MobileMenu = () => (
             key={link.label}
             href={link.href}
             label={link.label}
-            className="text-lg font-medium hover:text-blue-400"
+            className="text-lg font-medium hover:text-primary transition-colors"
           />
         ))}
-        <div className="h-px bg-neutral-800" />
+        <div className="h-px bg-border" />
+        <div className="flex items-center justify-between">
+          <span className="text-muted-foreground">Theme</span>
+          <ThemeToggle />
+        </div>
         <Button variant="ghost" className="justify-start px-0 text-lg">
           Sign In
         </Button>
-        <Button className="bg-blue-600 hover:bg-blue-700">Get Started</Button>
+        <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+          Get Started
+        </Button>
       </div>
     </SheetContent>
   </Sheet>
@@ -99,13 +112,13 @@ const MobileMenu = () => (
 // --- Main Component ---
 export const Navbar = () => {
   return (
-    <header className="fixed top-0 w-full z-50 border-b border-white/10 bg-neutral-950/50 backdrop-blur-md">
+    <header className="fixed top-0 w-full z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link
           href="/"
-          className="flex items-center gap-2 text-white font-bold text-xl"
+          className="flex items-center gap-2 text-foreground font-bold text-xl"
         >
-          <AventiLogo className="w-10 h-10 text-orange-500" />
+          <AventiLogo className="w-10 h-10 text-primary" />
           <span>Aventi</span>
         </Link>
 

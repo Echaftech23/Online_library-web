@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 
@@ -15,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Library App",
+  title: "Aventi - Digital Library",
   description:
-    "A simple library application built with Next.js, Tailwind CSS, and Flask.",
+    "A modern digital library application built with Next.js, Tailwind CSS, and Flask.",
 };
 
 export default function RootLayout({
@@ -26,13 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-neutral-950 text-neutral-200 selection:bg-blue-500/30`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground selection:bg-primary/20`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <ThemeProvider defaultTheme="dark">
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

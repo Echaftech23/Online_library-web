@@ -15,7 +15,6 @@ export const FeaturedBooks = () => {
           title="Popular"
           subject="adventure"
           limit={6}
-          accentColor="bg-emerald-500"
         />
 
         {/* Pre Order Section */}
@@ -23,7 +22,6 @@ export const FeaturedBooks = () => {
           title="Pre Order"
           subject="fantasy"
           limit={6}
-          accentColor="bg-emerald-500"
           className="mt-8"
         />
       </div>

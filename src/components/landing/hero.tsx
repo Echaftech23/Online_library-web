@@ -90,7 +90,7 @@ export const Hero = () => {
             key={item.label}
             className="bg-white/10 border-white/20 h-36 backdrop-blur-md rounded-xl flex flex-col items-center justify-center hover:scale-105 transition-transform"
           >
-            <Image src={item.icon} alt={item.label} width={56} height={56} />
+            <Image src={item.icon} alt={item.label} width={52} height={52} />
             <h3 className="text-lg font-semibold text-white mb-2">
               {item.label}
             </h3>

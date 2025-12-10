@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <FeaturedBooks />
       <Features />
+      <FeaturedBooks />
     </main>
   );
 }

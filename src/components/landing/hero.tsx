@@ -71,7 +71,7 @@ export const Hero = () => {
   }));
 
   return (
-    <section className=" pt-12">
+    <section className="pt-12">
       {/* Background Slider */}
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0">
@@ -79,7 +79,7 @@ export const Hero = () => {
         </div>
       </div>
       {/* for cards contain icon iligned with short 2 words */}
-      <div className="w-8/12 mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 py-16">
+      <div className="w-8/12 mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 py-24">
         {[
           { icon: "/icons/shield.png", label: "Original Products" },
           { icon: "/icons/credit-card.png", label: "Easy Payment" },
@@ -91,7 +91,7 @@ export const Hero = () => {
             className="bg-white/10 border-white/20 h-36 backdrop-blur-md rounded-xl flex flex-col items-center justify-center hover:scale-105 transition-transform"
           >
             <Image src={item.icon} alt={item.label} width={52} height={52} />
-            <h3 className="text-lg font-semibold text-white mb-2">
+            <h3 className="text-lg font-semibold text-foreground mb-2">
               {item.label}
             </h3>
           </Card>

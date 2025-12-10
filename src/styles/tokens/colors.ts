@@ -17,18 +17,18 @@
 export const palette = {
   // --- Primary: Earthy Orange/Rust ---
   // Used for primary actions, links, and brand identity
-  orange: {
-    50: "oklch(0.98 0.02 50)",
-    100: "oklch(0.95 0.05 50)",
-    200: "oklch(0.88 0.08 50)",
-    300: "oklch(0.80 0.12 50)",
-    400: "oklch(0.72 0.14 50)",
-    500: "oklch(0.65 0.15 50)", // Primary
-    600: "oklch(0.55 0.14 50)",
-    700: "oklch(0.45 0.12 50)",
-    800: "oklch(0.35 0.10 50)",
-    900: "oklch(0.25 0.08 50)",
-  },
+orange: {
+    50: "oklch(0.97 0.01 50)",
+    100: "oklch(0.93 0.03 45)",
+    200: "oklch(0.85 0.06 45)",
+    300: "oklch(0.75 0.09 42)",
+    400: "oklch(0.62 0.12 40)",
+    500: "oklch(0.50 0.13 38)", // Primary
+    600: "oklch(0.42 0.12 36)",
+    700: "oklch(0.35 0.10 35)", // Similar to #78350f
+    800: "oklch(0.28 0.08 34)",
+    900: "oklch(0.18 0.05 32)",
+},
 
   // --- Secondary: Forest Green ---
   // Used for secondary actions, success states, and nature theme

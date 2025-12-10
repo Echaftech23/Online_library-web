@@ -6,8 +6,19 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { BookCard } from "@/components/ui/book-card";
 import { BookCardSkeletonGrid } from "@/components/ui/book-card-skeleton";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { useBooks } from "@/hooks/useBooks";
 import { cn } from "@/lib/utils";
+
+// --- Constants ---
+const ITEMS_PER_PAGE = 8; // 2 rows × 4 columns
 
 // --- Types ---
 interface Category {
@@ -18,15 +29,19 @@ interface Category {
 
 // --- Data ---
 const categories: Category[] = [
-    { id: "wilderness", label: "Adventure Stories", subject: "adventure_stories" },
-    { id: "forest", label: "Forest & Nature", subject: "forest" },
-    { id: "travel", label: "Travel & Exploration", subject: "travel" },
-    { id: "survival", label: "Survival & Skills", subject: "survival" },
-    { id: "hiking", label: "Hiking & Trekking", subject: "hiking" },
-    { id: "camping", label: "Camping & Backpacking", subject: "camping" },
-    { id: "nature", label: "Nature & Wildlife", subject: "nature" },
-    { id: "geography", label: "Adventure Travel", subject: "adventure_travel" },
-    { id: "outdoor", label: "Outdoor Recreation", subject: "outdoor_sports" },
+  {
+    id: "wilderness",
+    label: "Adventure Stories",
+    subject: "adventure_stories",
+  },
+  { id: "forest", label: "Forest & Nature", subject: "forest" },
+  { id: "travel", label: "Travel & Exploration", subject: "travel" },
+  { id: "survival", label: "Survival & Skills", subject: "survival" },
+  { id: "hiking", label: "Hiking & Trekking", subject: "hiking" },
+  { id: "camping", label: "Camping & Backpacking", subject: "camping" },
+  { id: "nature", label: "Nature & Wildlife", subject: "nature" },
+  { id: "geography", label: "Adventure Travel", subject: "adventure_travel" },
+  { id: "outdoor", label: "Outdoor Recreation", subject: "outdoor_sports" },
 ];
 
 // --- Sub-components ---
@@ -84,13 +99,113 @@ const SearchBar = ({ value, onChange }: SearchBarProps) => (
   </div>
 );
 
+interface BooksPaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
+const BooksPagination = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: BooksPaginationProps) => {
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pages: (number | "ellipsis")[] = [];
+
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+
+      if (currentPage > 3) {
+        pages.push("ellipsis");
+      }
+
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
+
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+
+      if (currentPage < totalPages - 2) {
+        pages.push("ellipsis");
+      }
+
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
+
+  if (totalPages <= 1) return null;
+
+  return (
+    <Pagination className="mt-8">
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage > 1) onPageChange(currentPage - 1);
+            }}
+            className={cn(
+              currentPage === 1 && "pointer-events-none opacity-50"
+            )}
+          />
+        </PaginationItem>
+
+        {getPageNumbers().map((page, index) => (
+          <PaginationItem key={index}>
+            {page === "ellipsis" ? (
+              <span className="px-3 text-muted-foreground">...</span>
+            ) : (
+              <PaginationLink
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onPageChange(page);
+                }}
+                isActive={currentPage === page}
+              >
+                {page}
+              </PaginationLink>
+            )}
+          </PaginationItem>
+        ))}
+
+        <PaginationItem>
+          <PaginationNext
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (currentPage < totalPages) onPageChange(currentPage + 1);
+            }}
+            className={cn(
+              currentPage === totalPages && "pointer-events-none opacity-50"
+            )}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  );
+};
+
 // --- Main Component ---
 export const BooksFilter = () => {
   const [activeCategory, setActiveCategory] = useState<Category>(categories[0]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Fetch more books for pagination
   const { books, isLoading } = useBooks({
     subject: activeCategory.subject,
-    limit: 12,
+    limit: 32, // Fetch enough for multiple pages
   });
 
   // Filter books by search query (client-side)
@@ -99,6 +214,25 @@ export const BooksFilter = () => {
       book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       book.author.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredBooks.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const paginatedBooks = filteredBooks.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+
+  // Reset to page 1 when category or search changes
+  const handleCategoryChange = (category: Category) => {
+    setActiveCategory(category);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+  };
 
   return (
     <section className="py-16 bg-background">
@@ -109,11 +243,11 @@ export const BooksFilter = () => {
             <h2 className="text-2xl font-bold text-foreground mb-2">
               All Products
             </h2>
-            <div className="h-1 w-12 rounded-full bg-primary mb-6"/>
+            <div className="h-1 w-12 rounded-full bg-primary mb-6" />
             <CategoryList
               categories={categories}
               activeCategory={activeCategory.id}
-              onCategoryChange={setActiveCategory}
+              onCategoryChange={handleCategoryChange}
             />
           </aside>
 
@@ -121,18 +255,30 @@ export const BooksFilter = () => {
           <div className="flex-1">
             {/* Search Header */}
             <div className="flex items-center gap-4 mb-8">
-              <SearchBar value={searchQuery} onChange={setSearchQuery} />
+              <SearchBar value={searchQuery} onChange={handleSearchChange} />
             </div>
 
-            {/* Books Grid */}
+            {/* Books Grid - 2 rows × 4 columns = 8 items */}
             {isLoading ? (
-              <BookCardSkeletonGrid count={12} className="lg:grid-cols-4" />
-            ) : filteredBooks.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {filteredBooks.map((book) => (
-                  <BookCard key={book.id} book={book} />
-                ))}
-              </div>
+              <BookCardSkeletonGrid
+                count={ITEMS_PER_PAGE}
+                className="lg:grid-cols-4"
+              />
+            ) : paginatedBooks.length > 0 ? (
+              <>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {paginatedBooks.map((book) => (
+                    <BookCard key={book.id} book={book} />
+                  ))}
+                </div>
+
+                {/* Pagination */}
+                <BooksPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
+              </>
             ) : (
               <div className="text-center py-16">
                 <p className="text-muted-foreground">

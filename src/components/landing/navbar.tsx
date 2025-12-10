@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, Search } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { AventiLogo } from "./aventi-logo";
 
@@ -76,6 +76,7 @@ const MobileMenu = () => (
       side="right"
       className="bg-neutral-950 border-neutral-800 text-white"
     >
+      <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
       <div className="flex flex-col gap-6 mt-8">
         {navLinks.map((link) => (
           <NavLink

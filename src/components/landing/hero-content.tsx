@@ -39,7 +39,13 @@ export const HeroContent = ({
         <span className="text-transparent bg-clip-text bg-linear-to-r from-primary via-brand-orange to-amber-100">
           {subtitle}
         </span>
-      </motion.h1>
+
+
+
+
+
+
+                 </motion.h1>
 
       <motion.p
         initial={{ opacity: 0, y: 20 }}
@@ -66,7 +72,7 @@ export const HeroContent = ({
         <Button
           size="lg"
           variant="outline"
-          className="border-neutral-700 bg-transparent text-neutral-300 hover:bg-white/5 hover:text-white rounded-full backdrop-blur-sm"
+          className="border-neutral-700 bg-white/5 text-white hover:bg-transparent hover:text-neutral-300 rounded-full backdrop-blur-sm"
         >
           <PlayCircle className="mr-2 h-5 w-5" />
           Watch Demo

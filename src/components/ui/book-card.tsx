@@ -21,7 +21,7 @@ export const BookCard = ({ book, className }: BookCardProps) => (
       className
     )}
   >
-    <CardContent className="p-0 relative aspect-2/3">
+    <CardContent className="relative aspect-2/3">
       <Image
         src={book.cover}
         alt={book.title}
@@ -35,7 +35,7 @@ export const BookCard = ({ book, className }: BookCardProps) => (
         </Badge>
       </div>
     </CardContent>
-    <CardFooter className="flex flex-col items-start p-4">
+    <CardFooter className="flex flex-col items-start justify-between h-full p-4">
       <div className="flex items-center gap-1 text-primary mb-2">
         <Star className="h-4 w-4 fill-current" />
         <span className="text-sm font-medium text-foreground">

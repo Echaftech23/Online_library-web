@@ -72,7 +72,7 @@ export default function ThumbnailCarousel({
 
               {/* Content Overlay - Now inside the slide */}
               <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
-                <div className="container mx-auto px-4 w-4/6 h-4/6 p-12 rounded-2xl bg-black-100/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+                <div className="container mx-auto px-4 w-4/6 p-12 rounded-2xl bg-black-100/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
                   {item.content}
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function ThumbnailCarousel({
       </div>
 
       {/* Thumbnails */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 max-w-[90vw] hidden md:block">
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 max-w-[90vw] hidden md:block">
         <div
           className="overflow-hidden rounded-xl border border-white/10 bg-black/20 backdrop-blur-md p-1"
           ref={emblaThumbsRef}

@@ -71,7 +71,7 @@ export const Hero = () => {
   }));
 
   return (
-    <section className="pt-12">
+    <section className="pt-4">
       {/* Background Slider */}
       <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0">

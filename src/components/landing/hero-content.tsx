@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { motion } from 'framer-motion'
+import { Button } from '@/components/ui/button'
+import { ArrowRight, PlayCircle } from 'lucide-react'
 
 interface HeroContentProps {
-  title: string;
-  subtitle: string;
-  description: string;
-  badge: string;
+  title: string
+  subtitle: string
+  description: string
+  badge: string
 }
 
 export const HeroContent = ({
@@ -39,13 +39,7 @@ export const HeroContent = ({
         <span className="text-transparent bg-clip-text bg-linear-to-r from-primary via-brand-orange to-amber-100">
           {subtitle}
         </span>
-
-
-
-
-
-
-                 </motion.h1>
+      </motion.h1>
 
       <motion.p
         initial={{ opacity: 0, y: 20 }}
@@ -62,10 +56,7 @@ export const HeroContent = ({
         transition={{ duration: 0.5, delay: 0.3 }}
         className="flex flex-col sm:flex-row items-center justify-center gap-4"
       >
-        <Button
-          size="lg"
-          className="bg-primary rounded-full"
-        >
+        <Button size="lg" className="bg-primary rounded-full">
           Start Reading Free
           <ArrowRight className="ml-2 h-5 w-5" />
         </Button>
@@ -79,5 +70,5 @@ export const HeroContent = ({
         </Button>
       </motion.div>
     </div>
-  );
-};
+  )
+}

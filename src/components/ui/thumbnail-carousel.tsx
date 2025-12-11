@@ -72,7 +72,7 @@ export default function ThumbnailCarousel({
 
               {/* Content Overlay - Now inside the slide */}
               <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
-                <div className="container mx-auto px-4 w-4/6 p-12 rounded-2xl bg-black-100/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+                <div className="container mx-auto px-4 w-11/12 lg:w-2/3 2xl:w-1/2 p-6 md:p-10 rounded-2xl bg-black-100/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
                   {item.content}
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function ThumbnailCarousel({
       </div>
 
       {/* Thumbnails */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 max-w-[90vw] hidden md:block">
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 max-w-[60vw] md:max-w-[90vw] block">
         <div
           className="overflow-hidden rounded-xl border border-white/10 bg-black/20 backdrop-blur-md p-1"
           ref={emblaThumbsRef}
@@ -93,7 +93,7 @@ export default function ThumbnailCarousel({
                 key={item.id}
                 onClick={() => onThumbClick(index)}
                 className={cn(
-                  "relative flex-[0_0_auto] overflow-hidden rounded-lg transition-all duration-300 ease-out h-16 w-12 opacity-50 hover:opacity-100",
+                  "relative flex-[0_0_auto] overflow-hidden rounded-lg transition-all duration-300 ease-out h-14 w-14 md:h-16 opacity-50 hover:opacity-100",
                   index === selectedIndex && "w-32 opacity-100"
                 )}
               >
